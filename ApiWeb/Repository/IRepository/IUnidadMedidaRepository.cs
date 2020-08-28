@@ -8,11 +8,12 @@ namespace ApiWeb.Repository.IRepository
 {
     public interface IUnidadMedidaRepository
     {
-        int CreateProveedor(UnidadMedida DatosUnidadMedida);
-        ICollection<int> CreateProveedores(ICollection<UnidadMedida> DatosUnidadMedidas);
-        bool ExisteProveedor(string Nombre);
-        UnidadMedida GetUnidadMedida(int Id);
-        bool DeleteUnidadMedida(int Id);
+        string CreateUnidadMedida(UnidadMedida DatosUnidadMedida);
+        ICollection<string> CreateUnidadesMedida(ICollection<UnidadMedida> DatosUnidadMedidas);
+        bool ExisteUnidadMedida(string Nombre);
+        UnidadMedida GetUnidadMedida(string Id);
+        ICollection<UnidadMedida> GetUnidadMedidas();
+        bool DeleteUnidadMedida(string Id);
         UnidadMedida UpdateUnidadMedida(UnidadMedida DatosUnidadMedida);
         ICollection<UnidadMedida> UpdateUnidadMedidas(ICollection<UnidadMedida> DatosUnidadMedidas);
     }

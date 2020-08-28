@@ -11,10 +11,11 @@ namespace ApiWeb.Model
     public class UnidadMedida
     {
         [Key]
+        [Required]
         public string IdUnidadMedida { get; set; }
         [Required]
         [StringLength(100)]
-        public int Descripcion { get; set; }
+        public string Descripcion { get; set; }
         [Required]
         public DateTime FechaModifico { get; set; }
         public ICollection<Producto> Productos { get; set; }
