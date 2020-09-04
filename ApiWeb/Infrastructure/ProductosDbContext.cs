@@ -17,5 +17,6 @@ namespace ApiWeb.Infrastructure
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Proveedor> Proveedores { get; set; }
         public DbSet<UnidadMedida> UnidadMedidas { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
     }
 }

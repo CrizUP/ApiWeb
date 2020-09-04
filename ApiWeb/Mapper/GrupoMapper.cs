@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace ApiWeb.Mapper
 {
-    public class ProductoMapper: Profile
+    public class GrupoMapper : Profile
     {
-        public ProductoMapper()
-        {            
-            CreateMap<Producto, ProductoDTO>().ReverseMap(); 
+        public GrupoMapper()
+        {
+            CreateMap<Grupo, GrupoDTO>().ReverseMap();
         }
-
     }
 }

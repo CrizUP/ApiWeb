@@ -11,6 +11,8 @@
     <Compile Remove="Migrations\20200814032233_MigracionBD2.Designer.cs" />
     <Compile Remove="Migrations\20200814032512_MigracionBD2.cs" />
     <Compile Remove="Migrations\20200814032512_MigracionBD2.Designer.cs" />
+    <Compile Remove="Migrations\20200904040514_ParteUsuario.cs" />
+    <Compile Remove="Migrations\20200904040514_ParteUsuario.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

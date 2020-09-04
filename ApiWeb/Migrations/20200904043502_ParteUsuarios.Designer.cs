@@ -4,14 +4,16 @@ using ApiWeb.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ApiWeb.Migrations
 {
     [DbContext(typeof(ProductosDbContext))]
-    partial class ProductosDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200904043502_ParteUsuarios")]
+    partial class ParteUsuarios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,7 +34,7 @@ namespace ApiWeb.Migrations
                     b.Property<DateTime>("FechaCreo")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("FechaModifico")
+                    b.Property<DateTime>("FechaModifico")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("IdProveedor")
@@ -76,7 +78,7 @@ namespace ApiWeb.Migrations
                     b.Property<DateTime>("FechaCreo")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("FechaModifico")
+                    b.Property<DateTime>("FechaModifico")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Nombre")
@@ -115,7 +117,7 @@ namespace ApiWeb.Migrations
                     b.Property<DateTime>("FechaCreo")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("FechaModifico")
+                    b.Property<DateTime>("FechaModifico")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("IdGrupo")
@@ -165,7 +167,7 @@ namespace ApiWeb.Migrations
                     b.Property<DateTime>("FechaCreo")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("FechaModifico")
+                    b.Property<DateTime>("FechaModifico")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Nombre")
@@ -218,7 +220,7 @@ namespace ApiWeb.Migrations
                     b.Property<DateTime>("FechaCreo")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("FechaModifico")
+                    b.Property<DateTime>("FechaModifico")
                         .HasColumnType("datetime2");
 
                     b.Property<byte[]>("HashPassword")

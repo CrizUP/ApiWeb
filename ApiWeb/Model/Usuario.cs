@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace ApiWeb.Model
 {
-    [Table(name: "Grupo", Schema = "Cat")]
-    public class Grupo
+    [Table(name: "Usuario", Schema = "Cat")]
+    public class Usuario
     {
         [Key]
-        public int IdGrupo { get; set; }
+        public int IdUsuario { get; set; }
         [Required]
-        [StringLength(100)]
-        public string Nombre { get; set; }
+        public string ClientId { get; set; }
         [Required]
-        [StringLength(300)]
-        public string Descripcion { get; set; }
+        public byte[] HashPassword { get; set; }
+        [Required]
+        public byte[] SaltPassword { get; set; }
         [Required]
         public bool Activo { get; set; }
         [Required]
         public DateTime FechaCreo { get; set; }
         public DateTime? FechaModifico { get; set; }
-        public ICollection<Producto> Productos { get; set; }
+
     }
 }

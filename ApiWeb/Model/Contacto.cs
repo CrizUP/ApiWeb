@@ -28,7 +28,6 @@ namespace ApiWeb.Model
         public bool Activo { get; set; }
         [Required]
         public DateTime FechaCreo { get; set; }
-        [Required]
-        public DateTime FechaModifico { get; set; }
+        public DateTime? FechaModifico { get; set; }
     }
 }
