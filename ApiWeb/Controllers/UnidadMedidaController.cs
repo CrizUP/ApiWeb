@@ -13,6 +13,7 @@ namespace ApiWeb.Controllers
 {
     [Route("api/UnidadMedida")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "UnidadesMedidaProductosAPI")]
     public class UnidadMedidaController : ControllerBase
     {
         private readonly IUnidadMedidaRepository _UnidadMedidaRepository;

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiWeb</name>
+    </assembly>
+    <members>
+        <member name="M:ApiWeb.Controllers.UsuarioController.GetUsuarios">
+            <summary>
+            Obtienen todos los usuarios registrados
+            </summary>
+            <returns>Lista de usuarios</returns>
+        </member>
+    </members>
+</doc>

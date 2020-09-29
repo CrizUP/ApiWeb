@@ -19,6 +19,7 @@ namespace ApiWeb.Controllers
 {
     [Route("api/Usuario")]
     [ApiController]
+    [ApiExplorerSettings(GroupName = "UsuariosProductosAPI")]
     public class UsuarioController : ControllerBase
     {
         private readonly IUsuarioRepository _usuarioRepository;
@@ -31,8 +32,14 @@ namespace ApiWeb.Controllers
             _mapper = mapper;
             _configuration = configuration;
         }
+        /// <summary>
+        /// Obtienen todos los usuarios registrados
+        /// </summary>
+        /// <returns>Lista de usuarios</returns>
         [Authorize]
         [HttpGet]
+        [ProducesResponseType(201, Type = typeof(List<UsuarioDTO>))]
+        [ProducesResponseType(400, Type = typeof(List<UsuarioDTO>))]
         public ActionResult GetUsuarios()
         {
             var LstUsuarios = _usuarioRepository.GetUsuarios();

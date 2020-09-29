@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using ApiWeb.Infrastructure;
@@ -19,6 +21,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace ApiWeb
 {
@@ -59,6 +62,71 @@ namespace ApiWeb
                 };
             });
 
+
+            //Parte para utilizar swagger y documentar la API
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("UsuariosProductosAPI", new OpenApiInfo()
+                {
+                    Title = "Usuarios Productos API",
+                    Description = "Contiene los usuarios de la aplicación",
+                    Version = "1.0",
+                    Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                    {
+                        Email = "cris_up@outlook.com",
+                        Name = "Cristhian Ubaldo Promotor",
+                        Url = new Uri("https://axsistecnologia.com")
+                    },
+                    License = new Microsoft.OpenApi.Models.OpenApiLicense
+                    {
+                        Name = "BSD",
+                        Url = new Uri("https://bsd.axsistec.com")
+                    }
+                });
+
+                options.SwaggerDoc("UnidadesMedidaProductosAPI", new OpenApiInfo()
+                {
+                    Title = "Catalogos Generales API",
+                    Description = "Contiene las unidades de medida del sat para los productos",
+                    Version = "1.0",
+                    Contact = new Microsoft.OpenApi.Models.OpenApiContact
+                    {
+                        Email = "cris_up@outlook.com",
+                        Name = "Cristhian Ubaldo Promotor",
+                        Url = new Uri("https://axsistecnologia.com")
+                    },
+                    License = new Microsoft.OpenApi.Models.OpenApiLicense
+                    {
+                        Name = "BSD",
+                        Url = new Uri("https://bsd.axsistec.com")
+                    }
+                });
+
+                var XMLComentarios = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var APIRutaComentarios = Path.Combine(AppContext.BaseDirectory, XMLComentarios);
+                options.IncludeXmlComments(APIRutaComentarios);
+
+                options.AddSecurityDefinition("Bearer",
+                    new OpenApiSecurityScheme
+                    {
+                        Description = "JWT Authentication",
+                        Type = SecuritySchemeType.Http,
+                        Scheme = "bearer"
+                    });
+
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                    {
+                         new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Id = "Bearer",
+                                    Type = ReferenceType.SecurityScheme
+                                }
+                            }, new List<string>()
+                    }
+                });
+            });
             services.AddControllers();
         }
 
@@ -71,7 +139,14 @@ namespace ApiWeb
             }
 
             app.UseHttpsRedirection();
-
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                //options.SwaggerEndpoint("/swagger/CatalogosAPI/swagger.json", "Catalogos generales API");
+                options.SwaggerEndpoint("swagger/UsuariosProductosAPI/swagger.json", "Usuarios API");
+                options.SwaggerEndpoint("swagger/UnidadesMedidaProductosAPI/swagger.json", "Undades de medida de los productos API");
+                options.RoutePrefix = "";
+            });
             app.UseRouting();
             app.UseAuthentication();
 
@@ -81,6 +156,7 @@ namespace ApiWeb
             {
                 endpoints.MapControllers();
             });
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
         }
     }
 }

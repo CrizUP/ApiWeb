@@ -19,37 +19,62 @@ namespace ApiWeb.Repository
 
         public int CreateContacto(Contacto DatosContacto)
         {
-            throw new NotImplementedException();
+            _db.Contactos.Add(DatosContacto);
+            int rowsAffected = _db.SaveChanges();
+            return DatosContacto.IdContacto;
         }
 
         public ICollection<int> CreateContactos(ICollection<Contacto> DatosContactos)
         {
-            throw new NotImplementedException();
+            _db.Contactos.AddRange(DatosContactos);
+
+            _db.SaveChanges();
+            return DatosContactos.Select(i => i.IdContacto).ToList();
         }
 
         public bool DeleteContacto(int Id)
         {
-            throw new NotImplementedException();
+            var item = _db.Contactos.Where(x => x.IdContacto == Id).FirstOrDefault();
+            _db.Contactos.Remove(item);
+            int rowsChanged = _db.SaveChanges();
+            return rowsChanged > 0 ? true : false;
         }
 
         public bool ExisteContacto(string Nombre)
         {
-            throw new NotImplementedException();
+            return _db.Contactos.Any(x => x.Nombre == Nombre);
         }
 
         public Contacto GetContacto(int Id)
         {
-            throw new NotImplementedException();
+            return _db.Contactos.Where(x => x.IdContacto == Id).FirstOrDefault();
         }
 
         public Contacto UpdateContacto(Contacto DatosContacto)
         {
-            throw new NotImplementedException();
+            var item = _db.Contactos.Where(X => X.IdContacto == DatosContacto.IdContacto).FirstOrDefault();
+            item.FechaModifico = DatosContacto.FechaModifico;
+            item.Activo = DatosContacto.Activo;
+            item.Nombre = DatosContacto.Nombre;
+            item.Numero = DatosContacto.Numero;
+            item.Telefono = DatosContacto.Telefono;
+            _db.SaveChanges();
+            return item;
         }
 
         public ICollection<Contacto> UpdateContactos(ICollection<Contacto> DatosContactos)
         {
-            throw new NotImplementedException();
+            var listItems = _db.Contactos.Where(x => DatosContactos.Select(i => i.IdContacto).ToList().Contains(x.IdContacto)).ToList();
+            listItems.ForEach(e =>
+            {
+                e.FechaModifico = DatosContactos.Where(x => x.IdContacto == e.IdContacto).FirstOrDefault().FechaModifico;
+                e.Activo = DatosContactos.Where(x => x.IdContacto == e.IdContacto).FirstOrDefault().Activo;
+                e.Nombre = DatosContactos.Where(x => x.IdContacto == e.IdContacto).FirstOrDefault().Nombre;
+                e.Numero = DatosContactos.Where(x => x.IdContacto == e.IdContacto).FirstOrDefault().Numero;
+                e.Telefono = DatosContactos.Where(x => x.IdContacto == e.IdContacto).FirstOrDefault().Telefono;
+            });
+            _db.SaveChanges();
+            return DatosContactos;
         }
     }
 }
